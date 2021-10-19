@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:gap/gap.dart';
 import 'package:pyli_business_mobile/presentation/style/__style.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatefulWidget {
   TextEditingController? controller;
@@ -48,7 +49,7 @@ class CustomTextField extends StatefulWidget {
     this.textCapitalization = TextCapitalization.none,
     this.contentPadding = const EdgeInsets.symmetric(
       vertical: 21.0,
-      horizontal: 25.0,
+      horizontal: 20.0,
     ),
     this.activateFocus = true,
     this.borderRadius = 30.0,
@@ -99,7 +100,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         counterText: "",
         // suffixIcon: suffix,
         hintStyle: CustomStyle.textStyleButton1.copyWith(
-          fontSize: 14.0,
+          fontSize: 16.0.sp,
           color: widget.hintColor!.withOpacity(widget.hintColorOpacity!),
         ),
         contentPadding: widget.contentPadding,
@@ -153,36 +154,36 @@ class _CustomTextFieldState extends State<CustomTextField> {
         ),
         prefixIcon: widget.prefixIcon != null
             ? Container(
-                padding: EdgeInsets.all(15.0), child: widget.prefixIcon!)
-            : SizedBox(),
+            padding: EdgeInsets.all(15.0), child: widget.prefixIcon!)
+            : null,
         suffixIcon: widget.obscureText == false
             ? widget.suffix != null
-                ? widget.suffix
-                : null
+            ? widget.suffix
+            : null
             : GestureDetector(
-                onTap: () {
-                  setState(() {
-                    widget.isObscure = !widget.isObscure;
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      right: CustomDimensions.mediumPadding),
-                  child: widget.isObscure
-                      ? Icon(
-                          Icons.visibility_off,
-                          color: CustomColors.appBlackColor1
-                              .withOpacity(0.3),
-                          size: 27,
-                        )
-                      : Icon(
-                          Icons.visibility,
-                          color: CustomColors.appBlackColor1
-                              .withOpacity(0.3),
-                          size: 27,
-                        ),
-                ),
-              ),
+          onTap: () {
+            setState(() {
+              widget.isObscure = !widget.isObscure;
+            });
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(
+                right: CustomDimensions.mediumPadding),
+            child: widget.isObscure
+                ? Icon(
+              Icons.visibility_off,
+              color: CustomColors.appBlackColor1
+                  .withOpacity(0.3),
+              size: 27,
+            )
+                : Icon(
+              Icons.visibility,
+              color: CustomColors.appBlackColor1
+                  .withOpacity(0.3),
+              size: 27,
+            ),
+          ),
+        ),
       ),
     );
   }
