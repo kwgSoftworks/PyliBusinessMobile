@@ -117,12 +117,18 @@ class LoginView extends HookWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
-                    "Forgot Password?",
-                    style: CustomStyle.textStyleBody2.copyWith(
-                        fontSize: CustomDimensions.textSize16,
-                        fontWeight: FontWeight.w700,
-                        color: CustomColors.secondaryColor),
+                  InkWell(
+                    onTap: () {
+                      locator<NavigationHandler>()
+                          .pushNamed(Routes.forgot_password_view);
+                    },
+                    child: Text(
+                      "Forgot Password?",
+                      style: CustomStyle.textStyleBody2.copyWith(
+                          fontSize: CustomDimensions.textSize16,
+                          fontWeight: FontWeight.w700,
+                          color: CustomColors.secondaryColor),
+                    ),
                   )
                 ],
               ),

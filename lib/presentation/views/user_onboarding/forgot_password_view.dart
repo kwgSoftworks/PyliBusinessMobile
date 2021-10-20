@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pyli_business_mobile/handlers/__handlers.dart';
 import 'package:pyli_business_mobile/presentation/custom_design/custom_button.dart';
 import 'package:pyli_business_mobile/presentation/custom_design/custom_design.dart';
+import 'package:pyli_business_mobile/presentation/routes/routes.dart';
 import 'package:pyli_business_mobile/presentation/style/__style.dart';
 import 'package:pyli_business_mobile/presentation/style/custom_dimensions.dart';
 import 'package:pyli_business_mobile/utils/__utils.dart';
@@ -25,19 +27,24 @@ class ForgotPasswordView extends HookWidget {
               SizedBox(
                 height: 20.0,
               ),
-              Container(
-                child: SizedBox(
-                  child: Icon(
-                    Icons.arrow_back_ios_outlined,
-                    size: 20.0,
-                    color: CustomColors.appBlackColor1,
+              InkWell(
+                onTap: (){
+                  locator<NavigationHandler>().goBack();
+                },
+                child: Container(
+                  child: SizedBox(
+                    child: Icon(
+                      Icons.arrow_back_ios_outlined,
+                      size: 20.0,
+                      color: CustomColors.appBlackColor1,
+                    ),
                   ),
-                ),
-                height: 40.0,
-                width: 40.0,
-                decoration: BoxDecoration(
-                  color: CustomColors.inputfieldGreyColor,
-                  shape: BoxShape.circle,
+                  height: 40.0,
+                  width: 40.0,
+                  decoration: BoxDecoration(
+                    color: CustomColors.inputfieldGreyColor,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
               SizedBox(
@@ -90,6 +97,9 @@ class ForgotPasswordView extends HookWidget {
                 title: "RESET PASSWORD",
                 buttonColor: CustomColors.secondaryColor,
                 borderRadius: 10.0,
+                onTap: (){
+                  locator<NavigationHandler>().pushNamed(Routes.email_sent_view);
+                },
               ),
               Spacer(),
               Container(
