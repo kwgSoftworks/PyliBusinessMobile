@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:pyli_business_mobile/presentation/bloc_controller/bloc/app_state_bloc.dart';
-import 'package:pyli_business_mobile/presentation/bloc_controller/events/app_state_event.dart';
-import 'package:pyli_business_mobile/presentation/bloc_controller/states/app_state.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/app_state/app_state.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/app_state/app_state_bloc.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/app_state/app_state_event.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/form_submission_status.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/registration/registration_bloc.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/registration/registration_event.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/registration/registration_state.dart';
 import 'package:pyli_business_mobile/presentation/custom_design/custom_button.dart';
 import 'package:pyli_business_mobile/presentation/custom_design/custom_design.dart';
 import 'package:pyli_business_mobile/presentation/custom_design/custom_reg_stage_design.dart';
@@ -23,6 +27,7 @@ class SignUpView extends HookWidget {
   Widget build(BuildContext context) {
     return BaseScaffold(
       backgroundColor: CustomColors.whiteColor,
+        resizeToAvoidBottomInset: false,
       builder: (size) {
         return Container(
           margin: EdgeInsets.symmetric(
@@ -162,15 +167,21 @@ class SignUpView extends HookWidget {
                     SizedBox(
                       height: 10.0,
                     ),
-                    CustomButton(
-                      title: "SIGN UP",
-                      buttonColor: CustomColors.secondaryColor,
-                      borderRadius: 10.0,
-                      onTap: () {
-                        context.read<AppStateBloc>().add(
-                              RegistrationNavigationStageChanged(),
-                            );
-                      },
+                    BlocBuilder<RegistrationBloc, RegistrationState>(
+                      builder: (context, state) {
+                        return CustomButton(
+                          title: "SIGN UP",
+                          buttonColor: CustomColors.secondaryColor,
+                          borderRadius: 10.0,
+                          isProcessing: state.formSubmissionStatus is FormSubmitting,
+                          onTap: () {
+
+                            context.read<AppStateBloc>().add(
+                                  RegistrationNavigationStageChanged(),
+                                );
+                          },
+                        );
+                      }
                     ),
                     SizedBox(
                       height: 10.0,

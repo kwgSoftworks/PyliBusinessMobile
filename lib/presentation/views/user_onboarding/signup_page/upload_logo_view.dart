@@ -24,31 +24,31 @@ class UploadPhotoView extends StatelessWidget {
                     fontSize: CustomDimensions.textSize16,
                   ),
             ),
-            SizedBox(
-              height: 10.0,
-            ),
-            DottedBorder(
-              color: CustomColors.secondaryColor,
-              borderType: BorderType.RRect,
-              strokeWidth: 3,
-              dashPattern: [7, 7, 7, 7],
-              radius: Radius.circular(10.0),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 200.0,
-                margin: EdgeInsets.symmetric(horizontal: 30.0),
-                child: Center(
-                  child: CustomButton(
-                    title: "Upload Company Logo",
-                    titleColor: CustomColors.primaryColor,
-                    isBorderButton: true,
-                    borderRadius: 10.0,
-                    borderWidth: 1,
-                    buttonWidth: 200.0,
-                  ),
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   height: 10.0,
+            // ),
+            // DottedBorder(
+            //   color: CustomColors.secondaryColor,
+            //   borderType: BorderType.RRect,
+            //   strokeWidth: 3,
+            //   dashPattern: [7, 7, 7, 7],
+            //   radius: Radius.circular(10.0),
+            //   child: Container(
+            //     width: MediaQuery.of(context).size.width,
+            //     height: 200.0,
+            //     margin: EdgeInsets.symmetric(horizontal: 30.0),
+            //     child: Center(
+            //       child: CustomButton(
+            //         title: "Upload Company Logo",
+            //         titleColor: CustomColors.primaryColor,
+            //         isBorderButton: true,
+            //         borderRadius: 10.0,
+            //         borderWidth: 1,
+            //         buttonWidth: 200.0,
+            //       ),
+            //     ),
+            //   ),
+            // ),
             SizedBox(
               height: 30.0,
             ),

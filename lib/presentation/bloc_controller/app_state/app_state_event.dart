@@ -15,7 +15,6 @@ class RegistrationNavigationStageChanged extends AppStateEvent {
     this.registrationNavigationDirection = RegistrationNavigationDirection.forward,
   });
 
-
 }
 
 class SelectedSideBarChanged extends AppStateEvent {

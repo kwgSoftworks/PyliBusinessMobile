@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pyli_business_mobile/handlers/__handlers.dart';
-import 'package:pyli_business_mobile/presentation/bloc_controller/events/app_state_event.dart';
-import 'package:pyli_business_mobile/presentation/bloc_controller/states/app_state.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/app_state/app_state.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/app_state/app_state_event.dart';
 import 'package:pyli_business_mobile/presentation/routes/routes.dart';
 import 'package:pyli_business_mobile/utils/__utils.dart';
 import 'package:pyli_business_mobile/utils/enums.dart';
@@ -34,6 +34,7 @@ class AppStateBloc extends Bloc<AppStateEvent, AppState> {
           emit(state.copyWith(currentRegistrationStage: RegistrationStageEnum.step3));
           break;
         default:
+          print("asdf");
           locator<NavigationHandler>()
               .pushNamedAndRemoveUntil(Routes.dashboard_view);
           break;

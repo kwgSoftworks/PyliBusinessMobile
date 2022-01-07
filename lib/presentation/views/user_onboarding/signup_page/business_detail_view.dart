@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/registration/registration_bloc.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/registration/registration_event.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/registration/registration_state.dart';
 import 'package:pyli_business_mobile/presentation/custom_design/custom_design.dart';
 import 'package:pyli_business_mobile/presentation/style/__style.dart';
 import 'package:pyli_business_mobile/utils/validators.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BusinessDetailsView extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,42 +23,51 @@ class BusinessDetailsView extends StatelessWidget {
             Text(
               "Company Name",
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: CustomDimensions.textSize16,
-              ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: CustomDimensions.textSize16,
+                  ),
             ),
             Gap(5.h),
-            CustomTextField(
-              hint: "Company Name",
-              borderRadius: 10.0,
-              activateFocus: false,
-              validator: Validators.validateIsEmpty,
-              fillColor: CustomColors.inputfieldGreyColor,
-            ),
+            BlocBuilder<RegistrationBloc, RegistrationState>(
+                builder: (context, state) {
+              return CustomTextField(
+                hint: "Company Name",
+                borderRadius: 10.0,
+                activateFocus: false,
+                validator: Validators.validateIsEmpty,
+                fillColor: CustomColors.inputfieldGreyColor,
+                onChanged: (value) => context.read<RegistrationBloc>().add(
+                      CompanyNameChanged(companyName: value),
+                    ),
+              );
+            }),
             Gap(20.h),
-            Text(
-              "Company Email",
-              style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: CustomDimensions.textSize16,
-              ),
-            ),
-            Gap(5.h),
-            CustomTextField(
-              hint: "Company Email",
-              borderRadius: 10.0,
-              activateFocus: false,
-              keyboardType: TextInputType.emailAddress,
-              validator: Validators.isEmailStr,
-              fillColor: CustomColors.inputfieldGreyColor,
-            ),
-            Gap(20.h),
+            // Text(
+            //   "Company Email",
+            //   style: Theme.of(context).textTheme.bodyText2!.copyWith(
+            //         fontWeight: FontWeight.w400,
+            //         fontSize: CustomDimensions.textSize16,
+            //       ),
+            // ),
+            // Gap(5.h),
+            // CustomTextField(
+            //   hint: "Company Email",
+            //   borderRadius: 10.0,
+            //   activateFocus: false,
+            //   keyboardType: TextInputType.emailAddress,
+            //   validator: Validators.isEmailStr,
+            //   fillColor: CustomColors.inputfieldGreyColor,
+            //   onChanged: (value) => context.read<RegistrationBloc>().add(
+            //     EmailChanged(email: value),
+            //   ),
+            // ),
+            // Gap(20.h),
             Text(
               "Company Website",
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: CustomDimensions.textSize16,
-              ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: CustomDimensions.textSize16,
+                  ),
             ),
             SizedBox(
               height: 5.0,
@@ -66,14 +78,17 @@ class BusinessDetailsView extends StatelessWidget {
               activateFocus: false,
               validator: Validators.validateIsEmpty,
               fillColor: CustomColors.inputfieldGreyColor,
+              onChanged: (value) => context.read<RegistrationBloc>().add(
+                CompanyWebsiteChanged(companyWebsite: value),
+              ),
             ),
             Gap(20.h),
             Text(
               "Company Address",
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: CustomDimensions.textSize16,
-              ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: CustomDimensions.textSize16,
+                  ),
             ),
             Gap(20.h),
             CustomTextField(
@@ -82,14 +97,17 @@ class BusinessDetailsView extends StatelessWidget {
               activateFocus: false,
               validator: Validators.validateIsEmpty,
               fillColor: CustomColors.inputfieldGreyColor,
+              onChanged: (value) => context.read<RegistrationBloc>().add(
+                CompanyAddressChanged(companyAddress: value),
+              ),
             ),
             Gap(20.h),
             Text(
               "Company Phone",
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: CustomDimensions.textSize16,
-              ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: CustomDimensions.textSize16,
+                  ),
             ),
             Gap(5.h),
             CustomTextField(
@@ -99,14 +117,17 @@ class BusinessDetailsView extends StatelessWidget {
               validator: Validators.isEmailStr,
               keyboardType: TextInputType.number,
               fillColor: CustomColors.inputfieldGreyColor,
+              onChanged: (value) => context.read<RegistrationBloc>().add(
+                CompanyPhone(companyPhone: value),
+              ),
             ),
             Gap(20.h),
             Text(
               "LLC Number",
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: CustomDimensions.textSize16,
-              ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: CustomDimensions.textSize16,
+                  ),
             ),
             Gap(5.h),
             CustomTextField(
@@ -116,14 +137,17 @@ class BusinessDetailsView extends StatelessWidget {
               keyboardType: TextInputType.number,
               validator: Validators.isEmailStr,
               fillColor: CustomColors.inputfieldGreyColor,
+              onChanged: (value) => context.read<RegistrationBloc>().add(
+                LLCNumberChanged(llcNumber: value),
+              ),
             ),
             Gap(20.h),
             Text(
               "Provider",
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: CustomDimensions.textSize16,
-              ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: CustomDimensions.textSize16,
+                  ),
             ),
             Gap(5.h),
             CustomTextField(
@@ -132,14 +156,17 @@ class BusinessDetailsView extends StatelessWidget {
               activateFocus: false,
               validator: Validators.isEmailStr,
               fillColor: CustomColors.inputfieldGreyColor,
+              onChanged: (value) => context.read<RegistrationBloc>().add(
+                ProviderNameChanged(providerName: value),
+              ),
             ),
             Gap(20.h),
             Text(
               "Bank Name",
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: CustomDimensions.textSize16,
-              ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: CustomDimensions.textSize16,
+                  ),
             ),
             Gap(5.h),
             CustomTextField(
@@ -148,14 +175,17 @@ class BusinessDetailsView extends StatelessWidget {
               activateFocus: false,
               validator: Validators.isEmailStr,
               fillColor: CustomColors.inputfieldGreyColor,
+              onChanged: (value) => context.read<RegistrationBloc>().add(
+                CompanyBankNameChanged(bankName: value),
+              ),
             ),
             Gap(20.h),
             Text(
               "Bank Account Number",
               style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                fontWeight: FontWeight.w400,
-                fontSize: CustomDimensions.textSize16,
-              ),
+                    fontWeight: FontWeight.w400,
+                    fontSize: CustomDimensions.textSize16,
+                  ),
             ),
             Gap(5.h),
             CustomTextField(
@@ -163,8 +193,11 @@ class BusinessDetailsView extends StatelessWidget {
               borderRadius: 10.0,
               activateFocus: false,
               keyboardType: TextInputType.number,
-              validator: Validators.isEmailStr,
+              // validator: Validators.validatePhoneNumber,
               fillColor: CustomColors.inputfieldGreyColor,
+              onChanged: (value) => context.read<RegistrationBloc>().add(
+                ProviderNameChanged(providerName: value),
+              ),
             ),
             Gap(10.h),
           ],

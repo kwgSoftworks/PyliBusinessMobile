@@ -45,7 +45,7 @@ class ContractSetupView extends HookWidget {
                     activateFocus: false,
                     fillColor: CustomColors.inputfieldGreyColor,
                   ),
-                  Gap(20.h),
+                  Gap(20.h), 
                   Container(
                     width: 215.0.w,
                     padding: EdgeInsets.all(5.0),

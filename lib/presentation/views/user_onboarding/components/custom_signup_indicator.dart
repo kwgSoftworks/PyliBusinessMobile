@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pyli_business_mobile/presentation/bloc_controller/bloc/app_state_bloc.dart';
-import 'package:pyli_business_mobile/presentation/bloc_controller/states/app_state.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/app_state/app_state.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/app_state/app_state_bloc.dart';
 import 'package:pyli_business_mobile/presentation/custom_design/custom_reg_stage_design.dart';
 import 'package:pyli_business_mobile/presentation/views/user_onboarding/components/single_indicator_widgets.dart';
 import 'package:pyli_business_mobile/utils/enums.dart';
