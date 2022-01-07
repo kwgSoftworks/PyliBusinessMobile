@@ -1,13 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pyli_business_mobile/data/services/remote/implementations/user_repositories_impl.dart';
 import 'package:pyli_business_mobile/data/services/remote/repositories/user_repositories.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/app_state/app_state_bloc.dart';
 import 'package:pyli_business_mobile/presentation/bloc_controller/registration/registration_event.dart';
 import 'package:pyli_business_mobile/presentation/bloc_controller/form_submission_status.dart';
 import 'package:pyli_business_mobile/presentation/bloc_controller/registration/registration_state.dart';
 import 'package:pyli_business_mobile/utils/__utils.dart';
 
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
+
   RegistrationBloc() : super(RegistrationState()) {
+
     on<RegistrationSubmitted>(registerUser);
 
     on<FirstNameChanged>(firstNameChanged);
@@ -18,6 +23,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     on<CompanyPhoneChanged>(companyPhoneChanged);
     on<LLCNumberChanged>(companyLLCNumberChanged);
   }
+
 
   void registerUser(
       RegistrationSubmitted event, Emitter<RegistrationState> emit) async {

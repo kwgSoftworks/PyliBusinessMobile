@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pyli_business_mobile/handlers/__handlers.dart';
 import 'package:pyli_business_mobile/presentation/bloc_controller/app_state/app_state.dart';
 import 'package:pyli_business_mobile/presentation/bloc_controller/app_state/app_state_event.dart';
+import 'package:pyli_business_mobile/presentation/bloc_controller/registration/registration_bloc.dart';
 import 'package:pyli_business_mobile/presentation/routes/routes.dart';
 import 'package:pyli_business_mobile/utils/__utils.dart';
 import 'package:pyli_business_mobile/utils/enums.dart';
@@ -33,10 +36,14 @@ class AppStateBloc extends Bloc<AppStateEvent, AppState> {
         case RegistrationStageEnum.step2:
           emit(state.copyWith(currentRegistrationStage: RegistrationStageEnum.step3));
           break;
+        case RegistrationStageEnum.step3:
+          emit(state.copyWith(currentRegistrationStage: RegistrationStageEnum.completed));
+          break;
         default:
           print("asdf");
-          locator<NavigationHandler>()
-              .pushNamedAndRemoveUntil(Routes.dashboard_view);
+          emit(state.copyWith(currentRegistrationStage: RegistrationStageEnum.completed));
+          // locator<NavigationHandler>()
+          //     .pushNamedAndRemoveUntil(Routes.dashboard_view);
           break;
       }
 
@@ -44,6 +51,9 @@ class AppStateBloc extends Bloc<AppStateEvent, AppState> {
 
       switch (state.currentRegistrationStage) {
 
+        case RegistrationStageEnum.completed:
+          emit(state.copyWith(currentRegistrationStage: RegistrationStageEnum.step3));
+          break;
         case RegistrationStageEnum.step3:
           emit(state.copyWith(currentRegistrationStage: RegistrationStageEnum.step2));
           break;

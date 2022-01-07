@@ -26,7 +26,9 @@ class CustomSignupIndicator extends StatelessWidget {
                           state.currentRegistrationStage ==
                               RegistrationStageEnum.step2 ||
                           state.currentRegistrationStage ==
-                              RegistrationStageEnum.step3,
+                              RegistrationStageEnum.step3 ||
+                          state.currentRegistrationStage ==
+                              RegistrationStageEnum.completed,
                     ),
                     child: Container(
                       width: 120.0,
@@ -38,7 +40,9 @@ class CustomSignupIndicator extends StatelessWidget {
                               state.currentRegistrationStage ==
                                   RegistrationStageEnum.step2 ||
                               state.currentRegistrationStage ==
-                                  RegistrationStageEnum.step3,
+                                  RegistrationStageEnum.step3 ||
+                              state.currentRegistrationStage ==
+                                  RegistrationStageEnum.completed,
                           step: "1",
                           isCurrentStep: state.currentRegistrationStage ==
                               RegistrationStageEnum.step1,
@@ -54,7 +58,9 @@ class CustomSignupIndicator extends StatelessWidget {
                       isActive: state.currentRegistrationStage ==
                               RegistrationStageEnum.step2 ||
                           state.currentRegistrationStage ==
-                              RegistrationStageEnum.step3,
+                              RegistrationStageEnum.step3 ||
+                          state.currentRegistrationStage ==
+                              RegistrationStageEnum.completed,
                     ),
                     child: Container(
                       width: 120.0,
@@ -64,7 +70,9 @@ class CustomSignupIndicator extends StatelessWidget {
                           isActivated: state.currentRegistrationStage ==
                                   RegistrationStageEnum.step2 ||
                               state.currentRegistrationStage ==
-                                  RegistrationStageEnum.step3,
+                                  RegistrationStageEnum.step3 ||
+                              state.currentRegistrationStage ==
+                                  RegistrationStageEnum.completed,
                           isCurrentStep: state.currentRegistrationStage ==
                               RegistrationStageEnum.step2,
                           step: "2",
@@ -78,7 +86,9 @@ class CustomSignupIndicator extends StatelessWidget {
                   child: CustomPaint(
                     painter: CustomRegStateDesignRight(
                       isActive: state.currentRegistrationStage ==
-                          RegistrationStageEnum.step3,
+                          RegistrationStageEnum.step3 ||
+                          state.currentRegistrationStage ==
+                              RegistrationStageEnum.completed,
                     ),
                     child: Container(
                       width: 120.0,
@@ -89,7 +99,9 @@ class CustomSignupIndicator extends StatelessWidget {
                               RegistrationStageEnum.step3,
                           step: "3",
                           isActivated: state.currentRegistrationStage ==
-                              RegistrationStageEnum.step3,
+                              RegistrationStageEnum.step3 ||
+                              state.currentRegistrationStage ==
+                                  RegistrationStageEnum.completed,
                         ),
                       ),
                     ),

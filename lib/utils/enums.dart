@@ -22,5 +22,6 @@ enum SideBarItems{
 enum RegistrationStageEnum{
   step1,
   step2,
-  step3
+  step3,
+  completed,
 }
