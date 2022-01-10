@@ -17,7 +17,7 @@ class Failure extends ApiResponse {
   factory Failure.fromMap(Map<String, dynamic> json) {
     return Failure(
       ApiErrorResponse(
-        message: getErrorMessage(json['message']),
+        message: json,
         type: ErrorType.unknown,
       ),
     );

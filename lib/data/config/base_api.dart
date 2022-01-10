@@ -14,8 +14,10 @@ abstract class BaseApi {
   late Dio dio;
 
   BaseApi(String baseApi) {
+    print("================ https://$baseApi");
+
     final options = BaseOptions(
-      baseUrl: "https://$baseApi",
+      baseUrl: "https://" + baseApi.toString(),
       receiveDataWhenStatusError: true,
       connectTimeout: 60 * 1000, // 60 seconds
       receiveTimeout: 60 * 1000, // 60 seconds
@@ -43,52 +45,13 @@ abstract class BaseApi {
       }, onResponse: (response, handler) async {
         print("THIS IS THE STATUS CODE == " + response.statusCode.toString());
 
-        if (response.statusCode == 403 || response.statusCode == 401) {
-          dio.interceptors.requestLock.lock();
-
-          print("LAUCH REFRESH TOKEN");
-
-          //REFRESH TOKEN
-          _regenerateAccessToken(baseApi);
-
-          dio.interceptors.requestLock.unlock();
-
-          var token = await locator<LocalCache>().getFromLocalCache(AppStrings.refresh_token_pref);
-
-          options.headers["Authorization"] = "Bearer $token";
-
-          handler.next(response);
-        } else {
-          handler.next(response);
-        }
-
+        handler.next(response);
       }, onError: (error, handler) async {
         print("THIS IS THE STATUS CODE == " +
             error.response!.statusCode.toString());
 
-        if (error.response!.statusCode == 403 ||
-            error.response!.statusCode == 401) {
-          dio.interceptors.requestLock.lock();
-
-          print("LAUNCH REFRESH TOKEN");
-
-          //REFRESH TOKEN
-          await _regenerateAccessToken(baseApi);
-
-          dio.interceptors.requestLock.unlock();
-
-          var token = await locator<LocalCache>().getToken();
-
-          options.headers["Authorization"] = "Bearer $token";
-
-          handler.next(error);
-
-        } else {
-          handler.next(error);
-        }
-
-      }
-      ),
+        handler.next(error);
+      }),
     );
     if (kDebugMode) {
       dio.interceptors.add(
@@ -142,6 +105,7 @@ abstract class BaseApi {
     if (useToken) {
       authorizedHeader = await getAuthorizedHeader();
     }
+
     return makeRequest(dio.post(
       "/$path",
       data: data,
@@ -233,7 +197,10 @@ abstract class BaseApi {
           return Left(
             Failure(
               ApiErrorResponse(
-                message: mess.toString(),
+                message: {
+                  "error":
+                  "Oops. It took too long to send your request. Check your internet connection and try again."
+                },
               ),
             ),
           );
@@ -246,29 +213,30 @@ abstract class BaseApi {
         return Left(
           Failure(
             const ApiErrorResponse(
-              message:
-                  "Oops. It took too long to send your request. Check your internet connection and try again.",
+              message: {
+                "error":
+                    "Oops. It took too long to send your request. Check your internet connection and try again."
+              },
             ),
           ),
         );
       }
+
+      print("hey -- tttr" + e.response!.data.toString());
       // The request was made and the server responded with a status code
       // that falls out of the range of 2xx and is also not 304.
       if (e.response != null) {
         if (e.response?.data != null && e.response!.data is Map) {
+          print("GOTTEN HERE --" + e.response!.data.toString());
           return Left(Failure.fromMap(e.response!.data));
         }
         // return Left(Failure(e.response?.data));
         return Left(
-          Failure(
-            ApiErrorResponse(message: e.message),
-          ),
+          Failure.fromMap(e.response!.data),
         );
       } else {
         // Something happened in setting up or sending the request that triggered an Error
-        return Left(Failure(
-          ApiErrorResponse(message: e.message),
-        ));
+        return Left(Failure.fromMap(e.response!.data));
       }
     }
   }
@@ -283,7 +251,6 @@ abstract class BaseApi {
       var refresh_token = locator<LocalCache>()
           .getFromLocalCache(AppStrings.refresh_token_pref);
 
-
       // make request to server to get the new access token from server using refresh token
       final response = await dio.post(
         "https://$baseApi" + "auth/renew_access_token",
@@ -293,7 +260,6 @@ abstract class BaseApi {
       print(response.statusCode.toString() + response.toString());
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-
         final newAccessToken = response.data["data"]["access_token"];
 
         // save to local storage
@@ -309,18 +275,13 @@ abstract class BaseApi {
         // it means your refresh token no longer valid now, it may be revoked by the backend
         // _performLogout(_dio);
         return false;
-
       } else {
-
         print(response.statusCode);
         return false;
-
       }
-
     } catch (e) {
       print("}}}----" + e.toString() + "-----====");
       return false;
     }
   }
-
 }

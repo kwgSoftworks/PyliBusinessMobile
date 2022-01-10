@@ -3,7 +3,7 @@ import 'error_type_enum.dart';
 
 class ApiErrorResponse extends Equatable {
   final ErrorType type;
-  final String message;
+  final Map<String, dynamic> message;
 
   const ApiErrorResponse({
     this.type = ErrorType.unknown,

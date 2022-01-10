@@ -6,7 +6,7 @@ abstract class UserRepository {
 
   Future<GeneralResponse> signIn(String username, String password);
 
-  Future<void> signUp(
+  Future<GeneralResponse> signUp(
     String companyName,
     String firstName,
     String lastName,

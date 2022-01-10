@@ -1,7 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="us.pyli.pyli_business_mobile">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
    <application
-        android:label="pyli_business_mobile"
+        android:label="Pyli Business"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

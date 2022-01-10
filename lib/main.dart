@@ -20,11 +20,12 @@ void main() async {
 
   await loadEnvFile();
   final url = dotenv.env['BASE_URL']!;
+
   await setupLocator(baseApi: url);
 
   SystemChrome.setPreferredOrientations(
-          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
-      .then((val) {
+    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+  ).then((val) {
     runApp(
       MultiBlocProvider(
         providers: [
